@@ -10,13 +10,16 @@ const countryDisplay = countries => {
         const countryDiv = document.createElement("div")
         countryDiv.className="country"
         const countryInfo = `
-        <h1 class="desh"> ${countryName} </h1>
-        <h3 class="rajdhani"> ${country.capital}</h3>
+        <h1 class="desh">  ${countryName} </h1>
+        <h3 class="rajdhani"> Capital: ${country.capital}</h3>
+        <button onclick="showDetails('${country.name}')"> show more </button>
         `
         countryDiv.innerHTML = countryInfo;
         div.appendChild(countryDiv)
 
     });
+
+    
 
     //trying with details
     // for (let i=0;i<countries.length;i++){
@@ -33,4 +36,24 @@ const countryDisplay = countries => {
     //      div.appendChild(countryDiv)
     // }
 
+}
+
+const showDetails = name =>{
+    const url =`https://restcountries.eu/rest/v2/name/${name}`
+    fetch(url)
+    .then((response)=>response.json())
+    .then((data)=>countryInformation(data[0]));
+}
+
+const countryInformation = country=>{
+    console.log(country)
+    
+    const countryDiv = document.getElementById("countryInfo");
+    countryDiv.innerHTML=`
+    <h1>${country.name}</h1>
+    <p> ${country.region}</p>
+    <p> ${country.population}</p>
+    <img src="${country.flag}">
+                         
+    `
 }
