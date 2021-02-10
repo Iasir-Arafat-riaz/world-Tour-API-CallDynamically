@@ -5,7 +5,7 @@ fetch("https://restcountries.eu/rest/v2/all")
     //using shortcut
 const countryDisplay = countries => {
     const div = document.getElementById("country-list")
-    countries.forEach(country => {
+    countries.forEach((country) => {
         const countryName = country.name
         const countryDiv = document.createElement("div")
         countryDiv.className="country"
@@ -51,9 +51,10 @@ const countryInformation = country=>{
     const countryDiv = document.getElementById("countryInfo");
     countryDiv.innerHTML=`
     <h1>${country.name}</h1>
-    <p> ${country.region}</p>
-    <p> ${country.population}</p>
     <img src="${country.flag}">
-                         
+    
+    <p> Region : ${country.region}</p>
+    <p> Population: ${country.population}</p>
+    <p> Language: ${country.languages[0].nativeName}</p>                    
     `
 }
